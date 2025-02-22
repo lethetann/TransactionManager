@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transaction-app-deployment
+  labels:
+    app: transaction-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: transaction-app
+  template:
+    metadata:
+      labels:
+        app: transaction-app
+    spec:
+      containers:
+      - name: transaction-app
+        image: transaction-app:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"
